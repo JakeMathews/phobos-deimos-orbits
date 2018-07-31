@@ -1,14 +1,46 @@
-program betterOrbits
+program simulation
+	implicit none
+
+	real(kind = 8), allocatable :: phobos(:)
+	real(kind = 8), allocatable :: deimos(:)
+	real(kind = 8) :: t, tmax, dt
+
+	! Set general intial conditions
+	t = 0.0d0
+	tmax = 1.0d0 ! 1 orbit
+	dt = 0.001
+
+	! Set phobos inital conditions
+	phobos(1) = 1.0d0	! initial x-coordinate
+	phobos(2) = 0.0d0	! initial y-coordinate
+	phobos(3) = 0.0d0	! initial x-velocity (vy) 
+	phobos(4) = 6.30d0	! initial y-velocity (vy)
+
+	! Set deimos inital conditions
+	deimos(1) = 1.0d0	! initial x-coordinate
+	deimos(2) = 0.0d0	! initial y-coordinate
+	deimos(3) = 0.0d0	! initial x-velocity (vy) 
+	deimos(4) = 6.30d0	! initial y-velocity (vy)
+
+	call calculateOrbit(phobos, t, tmax, dt, 'phobos.dat')
+	call calculateOrbit(deimos, t, tmax, dt, 'deimos.dat')
+
+	stop
+end program simulation
+
+subroutine calculateOrbit(y, t, tmax, dt, fileName)
 	implicit none
 
 	integer :: num_eqns ! Number of equations
 	integer :: i
 
-	real(kind = 8), allocatable :: y(:)
+	real(kind = 8), intent(in), allocatable :: y(:)
+	real(kind = 8), intent(in) :: t, tmax, dt
+	char(len = *), intent(in) :: fileName
+
 	real(kind = 8), allocatable :: f1(:), f2(:), f3(:), f4(:) ! y1
 	real(kind = 8), allocatable :: rhs(:) ! r.h.s
-	real(kind = 8) :: t, tmax, dt
-
+	
 	! # of equations
 	num_eqns = 4
 
@@ -21,20 +53,20 @@ program betterOrbits
 	allocate(f4(num_eqns))
 	
 
-	t = 0.0d0 ! initialize time
-	tmax = 1.0d0 ! max orbital period
+	! t = 0.0d0 ! initialize time
+	! tmax = 1.0d0 ! max orbital period
 
 	! user input for time step
-	print*, 'Enter a time-step'
-	read*, dt
+	! print*, 'Enter a time-step'
+	! read*, dt
 
-	y(1) = 1.0d0	! initial x-coordinate
-	y(2) = 0.0d0	! initial y-coordinate
-	y(3) = 0.0d0	! initial x-velocity (vy) 
-	y(4) = 6.30d0	! initial y-velocity (vy)
+	! y(1) = 1.0d0	! initial x-coordinate
+	! y(2) = 0.0d0	! initial y-coordinate
+	! y(3) = 0.0d0	! initial x-velocity (vy) 
+	! y(4) = 6.30d0	! initial y-velocity (vy)
 
 	! open a file for output
-	open(unit = 10, file = 'xy-posrk4.dat', status = 'unknown')
+	open(unit = 10, file = fileName, status = 'unknown')
 
 	! integrate forward in time
 	do while (t <= tmax)
@@ -62,9 +94,9 @@ program betterOrbits
 	end do
 
 	close(unit = 10)
-	
-	stop
-end program betterOrbits
+
+	return
+end subroutine calculateOrbit
 
 ! return the right-hand-side (rhs) of our eqns
 subroutine rhs_eqns(t, y0, rhs)
