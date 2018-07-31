@@ -33,3 +33,6 @@
 
 # Generated data files
 *.dat
+
+# Run script
+run.sh

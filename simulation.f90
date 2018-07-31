@@ -6,29 +6,29 @@ program simulation
 	real(kind = 8) :: t, tmax, dt
 	real(kind = 8) :: initialVelocity
 
-	real(kind = 8), parameter :: normalizedGravity = 39.5d0
+	real(kind = 8), parameter :: normalizedGravityPhobos = 4.28871 * 10**13
+	real(kind = 8), parameter :: normalizedGravityDeimos = 4.2839 * 10**13
 
 	! Set general intial conditions
 	t = 0.0d0
-	tmax = 1.0d0 ! 1 orbit
-	dt = 0.001
+	dt = 1.0d0
 
 	! Set phobos inital conditions
 	allocate(phobos(4))
 	phobos(1) = 9376000d0	! initial x-coordinate
 	phobos(2) = 0.0d0	! initial y-coordinate
 	phobos(3) = 0.0d0	! initial x-velocity (vy) 
-	phobos(4) = initialVelocity(normalizedGravity, phobos(1))	! initial y-velocity (vy)
+	phobos(4) = initialVelocity(normalizedGravityPhobos, phobos(1))	! initial y-velocity (vy)
 
 	! Set deimos inital conditions
 	allocate(deimos(4))
 	deimos(1) = 23470100	! initial x-coordinate
 	deimos(2) = 0.0d0	! initial y-coordinate
 	deimos(3) = 0.0d0	! initial x-velocity (vy) 
-	deimos(4) = initialVelocity(normalizedGravity, deimos(1))	! initial y-velocity (vy)
+	deimos(4) = initialVelocity(normalizedGravityDeimos, deimos(1))	! initial y-velocity (vy)
 
-	call calculateOrbit(phobos(1), phobos(2), phobos(3), phobos(4), t, tmax, dt, 'phobos.dat')
-	! call calculateOrbit(deimos, t, tmax, dt, 'deimos.dat')
+  !call calculateOrbit(phobos(1), phobos(2), phobos(3), phobos(4), t, 27554.0d0, dt, normalizedGravityPhobos, 'phobos.dat')
+	call calculateOrbit(deimos(1), deimos(2), deimos(3), deimos(4), t, 109075.0d0, dt, normalizedGravityDeimos, 'deimos.dat')
 
 	stop
 end program simulation
@@ -45,7 +45,7 @@ function initialVelocity(normalizedGravity, moonSemiMajorAxis)
 	return
 end function
 
-subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, fileName)
+subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileName)
 	implicit none
 
 	integer :: num_eqns ! Number of equations
@@ -56,6 +56,7 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, fileName)
 	real(kind = 8) :: t
 	real(kind = 8), intent(in) :: tmax, dt
 	character(len = *), intent(in) :: fileName
+	real(kind = 8), intent(in) :: gravity
 
 	real(kind = 8), allocatable :: f1(:), f2(:), f3(:), f4(:) ! y1
 	real(kind = 8), allocatable :: rhs(:) ! r.h.s
@@ -90,19 +91,19 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, fileName)
 	! integrate forward in time
 	do while (t <= tmax)
 		! evaluate right-hand-side of ODEs
-		call rhs_eqns(t, y, rhs)
+		call rhs_eqns(t, y, rhs, gravity)
 		f1 = dt * rhs ! apply first step
 	
 		! evaluate right-hand-side at midpoint (Q2)
-		call rhs_eqns(t + (0.5d0 * dt), y + (0.5d0 * f1), rhs)
+		call rhs_eqns(t + (0.5d0 * dt), y + (0.5d0 * f1), rhs, gravity)
 		f2 = dt * rhs ! apply second step
 		
 		! evaluate the right-hand-side at Q1
-		call rhs_eqns(t + (0.5d0 * dt), y + (0.5d0 * f2), rhs)
+		call rhs_eqns(t + (0.5d0 * dt), y + (0.5d0 * f2), rhs, gravity)
 		f3 = dt * rhs ! apply third step
 		
 		! evaluate the right-hand-side at Q3
-		call rhs_eqns(t + dt, y + f3, rhs)
+		call rhs_eqns(t + dt, y + f3, rhs, gravity)
 		f4 = dt * rhs ! apply fourth step
 		
 		y = y + ((f1 + f4) / 2 + (f2 + f3)) / 3
@@ -118,7 +119,7 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, fileName)
 end subroutine calculateOrbit
 
 ! return the right-hand-side (rhs) of our eqns
-subroutine rhs_eqns(t, y0, rhs)
+subroutine rhs_eqns(t, y0, rhs, gravity)
 	implicit none
 
 	real(kind = 8), intent(in) :: t, y0(4)
@@ -126,7 +127,7 @@ subroutine rhs_eqns(t, y0, rhs)
 	real(kind = 8) x, y, vx, vy
 
 	! constants normalized
-	real(kind = 8), parameter :: gravity = 39.5d0, mSun = 1.0d0
+	real(kind = 8), intent(in) :: gravity
 
 	! intialize vectors
 	x = y0(1)
@@ -141,10 +142,10 @@ subroutine rhs_eqns(t, y0, rhs)
 	rhs(2) = vy
 
 	! r.h.s of x-velocity equations
-	rhs(3) = -gravity * mSun * x / (x**2 + y**2)**1.5d0
+	rhs(3) = -gravity * x / (x**2 + y**2)**1.5d0
 
 	! r.h.s of y-velocity equations
-	rhs(4) = -gravity * mSun * y / (x**2 + y**2)**1.5d0
+	rhs(4) = -gravity * y / (x**2 + y**2)**1.5d0
 end subroutine rhs_eqns
 
 
