@@ -43,7 +43,7 @@
   \item Problem Overview
   \item Calculations
   \item Conclusion
-  \item Sources
+  \item Sources \& Questions
  \end{itemize}
 
 \end{frame}
@@ -100,18 +100,11 @@ Before performing the calculations to determine an objects new position in space
 %End Frame 4------------------------------------------------------------------------------------------------------
 
 %Frame 5-----------------------------------------------------------------------------------------------------------
-\begin{frame}{Calculations - Gravitational Constants}
-
-
- \end{frame}
-%End Frame 5-------------------------------------------------------------------------------------------------------
-
-%Frame 6-----------------------------------------------------------------------------------------------------------
 \begin{frame}{Calculations - Initial Position}
 
 \begin{itemize}
 \item We set the initial position of each moon to be at the semi-major axis of their orbit.
-\item The semi major axis of each moon as defined by Nasa are:
+\item The semi-major axis of each moon as defined by Nasa are:
 \begin{itemize}
 	\item Phobos: $9378km \rightarrow 9.378 x 10^6m$
 	\item Deimos: $23459km \rightarrow 23.459 x 10^6m$
@@ -125,6 +118,44 @@ Before performing the calculations to determine an objects new position in space
 
 \end{figure}
 
+
+ \end{frame}
+%End Frame 5-------------------------------------------------------------------------------------------------------
+
+%Frame 6-----------------------------------------------------------------------------------------------------------
+\begin{frame}{Calculations - Gravitational Constants}
+
+\begin{columns} % here is where you begin your columns
+ 
+ \begin{column}{0.50\textwidth} %first column with a defined size...
+  \begin{block}{Phobos} % remember this is the block title...
+   \begin{itemize}
+   	\item $G = 6.683*10^(-11) N*m^2*kg^{-2}$
+     \item $G = 4\pi ^{2}*\frac{R^{3}}{Year_{Phobos}*M_{System}}$
+     \item $R =  9.378 x 10^6m$
+	\item $M_{System} = M_{Mars} + M_{Phobos}$
+	\item $M_{Phobos} = 10.6 * 10^{15} kg$
+	\item $Year_{Phobos} = 27553.82 s$
+	\item $Gravity_{Phobos} = 4.2887 * 10^{13}$
+   \end{itemize}
+  \end{block}
+ \end{column}
+
+ \begin{column}{0.50\textwidth} % second column  
+  \begin{block}{Deimos}
+   \begin{itemize}
+     \item $G = 6.683*10^(-11) N*m^2*kg^{-2}$
+     \item $G = 4\pi ^{2}*\frac{R^{3}}{Year_{Moon}*M_{System}}$
+     \item $R =  23.459 x 10^6m$
+	\item $M_{System} = M_{Mars} + M_{Moon}$
+	\item $M_{Diemos} = 2.4 * 10^{15} kg$
+	\item $Year_{Diemos} = 109074.81 s$
+	\item $Gravity_{Phobos} = 4.2839  10^{13}$
+   \end{itemize}
+  \end{block}
+ \end{column}
+
+\end{columns}
 
  \end{frame}
 %End Frame 6-------------------------------------------------------------------------------------------------------
