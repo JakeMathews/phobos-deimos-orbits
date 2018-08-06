@@ -16,14 +16,14 @@ program simulation
 
 	! Set phobos inital conditions
 	allocate(phobos(4))
-	phobos(1) = 9376000d0	! initial x-coordinate
+	phobos(1) = 9378000d0	! initial x-coordinate
 	phobos(2) = 0.0d0	! initial y-coordinate
 	phobos(3) = 0.0d0	! initial x-velocity (vy) 
 	phobos(4) = initialVelocity(normalizedGravityPhobos, phobos(1))	! initial y-velocity (vy)
 
 	! Set deimos inital conditions
 	allocate(deimos(4))
-	deimos(1) = 23470100	! initial x-coordinate
+	deimos(1) = 23459000	! initial x-coordinate
 	deimos(2) = 0.0d0	! initial y-coordinate
 	deimos(3) = 0.0d0	! initial x-velocity (vy) 
 	deimos(4) = initialVelocity(normalizedGravityDeimos, deimos(1))	! initial y-velocity (vy)
