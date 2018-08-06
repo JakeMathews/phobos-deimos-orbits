@@ -3,14 +3,15 @@ program simulation
 
 	real(kind = 8), allocatable :: phobos(:)
 	real(kind = 8), allocatable :: deimos(:)
-	real(kind = 8) :: t, tmax, dt
+	real(kind = 8) :: t, tmax, dt, tInitial
 	real(kind = 8) :: initialVelocity
 
 	real(kind = 8), parameter :: normalizedGravityPhobos = 4.28871 * 10**13
 	real(kind = 8), parameter :: normalizedGravityDeimos = 4.2839 * 10**13
 
 	! Set general intial conditions
-	t = 0.0d0
+	tInitial = 0.0d0
+	t = tInitial
 	dt = 1.0d0
 
 	! Set phobos inital conditions
@@ -31,8 +32,10 @@ program simulation
 	open(unit = 10, file = 'phobos.dat', status = 'unknown')
 	open(unit = 20, file = 'deimos.dat', status = 'unknown')
 
-  call calculateOrbit(phobos(1), phobos(2), phobos(3), phobos(4), t, 27554.0d0, dt, normalizedGravityPhobos, 10)
-	call calculateOrbit(deimos(1), deimos(2), deimos(3), deimos(4), t, 109075.0d0, dt, normalizedGravityDeimos, 20)
+  call calculateOrbit(phobos(1), phobos(2), phobos(3), phobos(4), t, 27553.824d0, dt, normalizedGravityPhobos, 10)
+
+	t = tInitial
+	call calculateOrbit(deimos(1), deimos(2), deimos(3), deimos(4), t, 109074.816d0, dt, normalizedGravityDeimos, 20)
 
 	close(unit = 10)
 	close(unit = 20)
@@ -78,15 +81,8 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileUnit)
 	allocate(f2(num_eqns))
 	allocate(f3(num_eqns))
 	allocate(f4(num_eqns))
-	
 
-	! t = 0.0d0 ! initialize time
-	! tmax = 1.0d0 ! max orbital period
-
-	! user input for time step
-	! print*, 'Enter a time-step'
-	! read*, dt
-
+	! set initial conditions
 	y(1) = y1	! initial x-coordinate
 	y(2) = y2	! initial y-coordinate
 	y(3) = y3	! initial x-velocity (vy) 
