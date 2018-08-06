@@ -43,6 +43,7 @@
   \item Problem Overview
   \item Calculations
   \item Conclusion
+  \item Sources
  \end{itemize}
 
 \end{frame}
@@ -60,50 +61,66 @@
 
 %Frame 3-----------------------------------------------------------------------------------------------------------
 \begin{frame}{Problem Overview}
-A simple slide with some bullet points...
+
 \begin{figure}
 \label{fig:1}
 \includegraphics[scale=0.5]{orbitalDiagram}
 \caption{Orbital Diagram}
 \end{figure}
+
 \end{frame}
 %End Frame 3-------------------------------------------------------------------------------------------------------
 
 %Frame 4-----------------------------------------------------------------------------------------------------------
-\begin{frame}{Introduction}
-Beamer can do some neat things...like creating blocks and such...Here is a simple block:
+\begin{frame}{Calculations}
+Before performing the calculations to determine an objects new position in space, we must have some initial conditions to go off of. The initial conditions that need to be set are:
 
-\begin{block}{Title of Block}
 \begin{itemize}
-\item This statement is inside of a block.
-\item Blocks look nice and give a little shine to your presentation...
+
+\item Initial Position (X and Y Positions)
+\item Initial Velocity (X and Y Velocity Vectors)
+
+\item Time
+\begin{itemize}
+\item Time Step
+\item Initial Time
+\item Orbital Period (Max Time)
 \end{itemize}
-\end{block}
-You can even put ``pause'' commands 
 
-\pause
+\item Gravitational Constants for Phobos and Deimos
+\begin{itemize}
+\item Normalized for each moon
+\end{itemize}
 
-into your presentation...
+\end{itemize}
+
+
 
 \end{frame}
 %End Frame 4------------------------------------------------------------------------------------------------------
 
 %Frame 5-----------------------------------------------------------------------------------------------------------
-\begin{frame}[containsverbatim]{Some Basics}
+\begin{frame}{Some Basics}
 
-\begin{block}{Graphics}
- \begin{itemize}
- \item Graphics are the same in beamer presentations as they are in article class 
- \item The code will look something like this:
+\begin{block}{Initial Position}
+\begin{itemize}
+\item We set the initial position of each moon to be at the semi-major axis of their orbit.
+\item The semi major axis of each moon as defined by Nasa are:
+\begin{itemize}
+	\item Phobos: $9378km \rightarrow 9.378 x 10^6m$
+	\item Deimos: $23459km \rightarrow 23.459 x 10^6m$
+\end{itemize}
 \end{itemize}
 \end{block}
 
-\begin{verbatim}
-\centerline{\includegraphics[width=1.00\textwidth]
-{filename}}
-\end{verbatim}
- 
-\end{frame}
+\begin{figure}
+\label{fig:2}
+\includegraphics[scale=0.5]{orbitalDiagram}
+\caption{Orbital Diagram}
+\end{figure}
+
+
+ \end{frame}
 %End Frame 5-------------------------------------------------------------------------------------------------------
 
 
