@@ -27,8 +27,15 @@ program simulation
 	deimos(3) = 0.0d0	! initial x-velocity (vy) 
 	deimos(4) = initialVelocity(normalizedGravityDeimos, deimos(1))	! initial y-velocity (vy)
 
-  !call calculateOrbit(phobos(1), phobos(2), phobos(3), phobos(4), t, 27554.0d0, dt, normalizedGravityPhobos, 'phobos.dat')
-	call calculateOrbit(deimos(1), deimos(2), deimos(3), deimos(4), t, 109075.0d0, dt, normalizedGravityDeimos, 'deimos.dat')
+	! open a files for output
+	open(unit = 10, file = 'phobos.dat', status = 'unknown')
+	open(unit = 20, file = 'deimos.dat', status = 'unknown')
+
+  call calculateOrbit(phobos(1), phobos(2), phobos(3), phobos(4), t, 27554.0d0, dt, normalizedGravityPhobos, 10)
+	call calculateOrbit(deimos(1), deimos(2), deimos(3), deimos(4), t, 109075.0d0, dt, normalizedGravityDeimos, 20)
+
+	close(unit = 10)
+	close(unit = 20)
 
 	stop
 end program simulation
@@ -45,7 +52,7 @@ function initialVelocity(normalizedGravity, moonSemiMajorAxis)
 	return
 end function
 
-subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileName)
+subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileUnit)
 	implicit none
 
 	integer :: num_eqns ! Number of equations
@@ -55,7 +62,7 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileName)
 	real(kind = 8), allocatable :: y(:)
 	real(kind = 8) :: t
 	real(kind = 8), intent(in) :: tmax, dt
-	character(len = *), intent(in) :: fileName
+	integer, intent(in) :: fileUnit
 	real(kind = 8), intent(in) :: gravity
 
 	real(kind = 8), allocatable :: f1(:), f2(:), f3(:), f4(:) ! y1
@@ -85,9 +92,6 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileName)
 	y(3) = y3	! initial x-velocity (vy) 
 	y(4) = y4	! initial y-velocity (vy)
 
-	! open a file for output
-	open(unit = 10, file = fileName, status = 'unknown')
-
 	! integrate forward in time
 	do while (t <= tmax)
 		! evaluate right-hand-side of ODEs
@@ -110,10 +114,8 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileName)
 		t = t + dt	! increment time
 		
 		! write out the results
-		write(10, *) y(1), y(2)
+		write(fileUnit, *) y(1), y(2)
 	end do
-
-	close(unit = 10)
 
 	return
 end subroutine calculateOrbit
