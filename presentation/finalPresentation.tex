@@ -18,7 +18,7 @@
 \usetheme{CambridgeUS}       % The Theme of your presentation (many others available on the web)
 \usepackage{amsmath}
 \usepackage{verbatim}
-
+ 
 
 \title[Orbital Patterns of Martian Moons]{Orbital Patterns of Martian Moons}
 \author{Jake Mathews \& Ian Brown}
@@ -218,21 +218,71 @@ Now that we have normalized the gravitational constants, determining each moons 
 \end{frame}
 %End Frame 8-------------------------------------------------------------------------------------------------------
 
-%Frame 8-----------------------------------------------------------------------------------------------------------
-\begin{frame}{}
-Beamer is very easy to learn even if you are completely new to {\LaTeX}.  There are many different things you can do
-with the Beamer class...you can even embed video into your slides!\\[0.2cm]
+%Frame 9-----------------------------------------------------------------------------------------------------------
+\begin{frame}{Calculations - Fourth Order Runge Kutta Method}
 
-There are many, many, many good sources available on the web for {\LaTeX}.  Wiki Books on {\LaTeX} is a great place to start.  Using the Beamer class is pretty redundant...after making a few slides, you'll get used to it pretty 
-quick.\\[0.2cm]
+\begin{columns} % here is where you begin your columns
 
-I know this guide was very short, but the basics of presentations are pretty much the same regardless if you are using powerpoint or {\LaTeX}.  If you know {\LaTeX} then you know that math looks best in this typeset language...so all you need to know is how to basically create one slide that may inlcude bullet points, pictures, and columns. \\[0.2cm]
+ \begin{column}{0.50\textwidth} %first column with a defined size...
+  	\begin{block}{Right Hand Rule} 
+   		 \begin{itemize}
+     		 \item $\sum_{t=0}^{year}y(t)*dt$
+   		 \end{itemize}
+   	\end{block}
+	
+	\begin{block}{RK4 Expressions} % remember this is the block title...
+    \begin{itemize}
+      \item $k_{1}= \Delta t\vec{f}(\vec{y}^{n},t)$
+      \item $k_{2}= \Delta t\vec{f}(\vec{y}^{n} + \frac{1}{2}k_{1},t + \frac{1}{2}\Delta t)$
+      \item $k_{3}= \Delta t\vec{f}(\vec{y}^{n} + \frac{1}{2}k_{2},t + \frac{1}{2}\Delta t)$
+      \item $k_{4}= \Delta t\vec{f}(\vec{y}^{n} + k_{3}, t + \Delta t)$
+    \end{itemize}
+  \end{block}
+ \end{column}
 
-Once you know these things, than you can format your Beamer slides any way you want.  The best way to learn is to try
-it yourself.  I hope this guide will help get you started.
+ \begin{column}{0.50\textwidth} % second column  
+
+\begin{figure}
+\label{fig:3}
+\caption{Runge Kutta}
+\includegraphics[scale=0.35]{runge-kutta}
+\end{figure}
+ \end{column}
+\end{columns}
 
 \end{frame}
-%End Frame 8-------------------------------------------------------------------------------------------------------
+%End Frame 9-------------------------------------------------------------------------------------------------------
+
+%Frame 11-----------------------------------------------------------------------------------------------------------
+\begin{frame}{Conclusion}
+
+\end{frame}
+%End Frame 11-------------------------------------------------------------------------------------------------------
+
+%Frame 10-----------------------------------------------------------------------------------------------------------
+\begin{frame}{Calculations - Fourth Order Runge Kutta Method}
+
+  \begin{block}{RK4} % remember this is the block title...
+    \begin{itemize}
+      \item $k_{1}= \Delta t\vec{f}(\vec{y}^{n},t)$
+      \item $k_{2}= \Delta t\vec{f}(\vec{y}^{n} + \frac{1}{2}k_{1},t + \frac{1}{2}\Delta t)$
+      \item $k_{3}= \Delta t\vec{f}(\vec{y}^{n} + \frac{1}{2}k_{2},t + \frac{1}{2}\Delta t)$
+      \item $k_{4}= \Delta t\vec{f}(\vec{y}^{n} + k_{3}, t + \Delta t)$
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+%End Frame 10-------------------------------------------------------------------------------------------------------
+
+%Frame 11-----------------------------------------------------------------------------------------------------------
+\begin{frame}{Sources and Questions}
+
+\begin{itemize}
+	\item "Riemann Sum." Low-Pass Filter - Howling Pixel, \url{howlingpixel.com/i-en/Riemann_sum}
+\end{itemize}
+
+\end{frame}
+%End Frame 11-------------------------------------------------------------------------------------------------------
 
 
 \end{document} %Document ends here...
