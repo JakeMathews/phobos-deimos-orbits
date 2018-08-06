@@ -1,0 +1,159 @@
+%************************************************************************************************************%
+% This is a short introduction to the beamer class used by LaTex.  The beamer class allows you write LaTex   % 
+% documents for presentations.                                                                               %
+%************************************************************************************************************%
+
+%----------------------------------Written by: Omair Zubairi @ SDSU------------------------------------------%
+
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++%
+% The author gives permission to download, modify, and to use this document as he/she pleases.  Note that    %
+% this is only a guide to learn LaTex and how to use the Beamer class.  Many tutorials are available on      %
+% the Web.  A good place to start is Wiki Books on LaTex                                                     %
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++%
+
+
+
+\documentclass{beamer}  % Define your document class
+\usetheme{CambridgeUS}       % The Theme of your presentation (many others available on the web)
+\usepackage{amsmath}
+\usepackage{verbatim}
+
+
+\title[Orbital Patterns of Martian Moons]{Orbital Patterns of Martian Moons}
+\author{Jake Mathews \& Ian Brown}
+\institute{Wentworth Institute of Technology}
+\date{August 6th, 2018}
+
+
+%Actual code starts here---
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+% Here is a Frame 1------------------------------------------------------------------------------------------------
+\begin{frame}{Outline} % Frame title
+
+% Bullet points...
+ \begin{itemize}
+  \item Model Goals
+  \item Problem Overview
+  \item Calculations
+  \item Conclusion
+ \end{itemize}
+
+\end{frame}
+%End Frame 1-------------------------------------------------------------------------------------------------------
+
+
+% Here is a Frame 2------------------------------------------------------------------------------------------------
+\begin{frame}{Model Goals} % Frame title
+\begin{itemize}
+	\item The goal of our project is to model the interactions of the moons Phobos \& Deimos with the planet Mars due to Gravity
+	\item The program we created will simulate an objects path given some initial conditions and a gravitational constant. 
+	\item The simulation is run for each moon to simulate their interactions with the planet.
+\end{itemize}
+\end{frame}
+
+%Frame 3-----------------------------------------------------------------------------------------------------------
+\begin{frame}{Problem Overview}
+A simple slide with some bullet points...
+\begin{figure}
+\label{fig:1}
+\includegraphics[scale=0.5]{orbitalDiagram}
+\caption{Orbital Diagram}
+\end{figure}
+\end{frame}
+%End Frame 3-------------------------------------------------------------------------------------------------------
+
+%Frame 4-----------------------------------------------------------------------------------------------------------
+\begin{frame}{Introduction}
+Beamer can do some neat things...like creating blocks and such...Here is a simple block:
+
+\begin{block}{Title of Block}
+\begin{itemize}
+\item This statement is inside of a block.
+\item Blocks look nice and give a little shine to your presentation...
+\end{itemize}
+\end{block}
+You can even put ``pause'' commands 
+
+\pause
+
+into your presentation...
+
+\end{frame}
+%End Frame 4------------------------------------------------------------------------------------------------------
+
+%Frame 5-----------------------------------------------------------------------------------------------------------
+\begin{frame}[containsverbatim]{Some Basics}
+
+\begin{block}{Graphics}
+ \begin{itemize}
+ \item Graphics are the same in beamer presentations as they are in article class 
+ \item The code will look something like this:
+\end{itemize}
+\end{block}
+
+\begin{verbatim}
+\centerline{\includegraphics[width=1.00\textwidth]
+{filename}}
+\end{verbatim}
+ 
+\end{frame}
+%End Frame 5-------------------------------------------------------------------------------------------------------
+
+
+%Frame 6-----------------------------------------------------------------------------------------------------------
+\begin{frame}{Some Basics}
+ We can also have columns...here is an example. 
+
+
+\begin{columns} % here is where you begin your columns
+  
+ \begin{column}{0.50\textwidth} %first column with a defined size...
+  \begin{block}{First Column} % remember this is the block title...
+   \begin{itemize}
+     \item First item
+     \item Second item
+     \item Third item
+   \end{itemize}
+  \end{block}
+ \end{column}
+
+ \begin{column}{0.50\textwidth} % second column  
+  \begin{block}{Second Column}
+   \begin{itemize}
+    \item Fourth item
+    \item Fifth item
+    \item Sixth item
+   \end{itemize}
+  \end{block}
+ \end{column}
+
+\end{columns}
+
+\end{frame}
+%End Frame 6-------------------------------------------------------------------------------------------------------
+
+%Frame 7-----------------------------------------------------------------------------------------------------------
+\begin{frame}{}
+Beamer is very easy to learn even if you are completely new to {\LaTeX}.  There are many different things you can do
+with the Beamer class...you can even embed video into your slides!\\[0.2cm]
+
+There are many, many, many good sources available on the web for {\LaTeX}.  Wiki Books on {\LaTeX} is a great place to start.  Using the Beamer class is pretty redundant...after making a few slides, you'll get used to it pretty 
+quick.\\[0.2cm]
+
+I know this guide was very short, but the basics of presentations are pretty much the same regardless if you are using powerpoint or {\LaTeX}.  If you know {\LaTeX} then you know that math looks best in this typeset language...so all you need to know is how to basically create one slide that may inlcude bullet points, pictures, and columns. \\[0.2cm]
+
+Once you know these things, than you can format your Beamer slides any way you want.  The best way to learn is to try
+it yourself.  I hope this guide will help get you started.
+
+\end{frame}
+%End Frame 7-------------------------------------------------------------------------------------------------------
+
+
+\end{document} %Document ends here...
