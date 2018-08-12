@@ -16,23 +16,28 @@
 \begin{document}
 
 
-\title{\textbf{Title of Project}}
+\title{\textbf{Orbital Patterns of Martian Moons}}
 
-\author{Omair Zubairi
-\thanks{zubairio@wit.edu}\\
-Department of Sciences, Wentworth Institute of Technology\\
+\author{Jake Mathews
+\thanks{mathewsj2@wit.edu}\\
+Computer Science Undergraduate Program, Wentworth Institute of Technology\\
 550 Huntington Avenue, Boston, MA 02115\\
-\and Author 2
-\thanks{author2@wit.edu}\\
-Department of whatever, Wentworth Institute of Technology\\
+\and Ian Brown
+\thanks{browni1@wit.edu}\\
+INSERT MAJOR HERE, Wentworth Institute of Technology\\
 550 Huntington Avenue, Boston, MA 02115}
 
 \maketitle
 
 \begin{abstract}
 
-Abstract goes here...no more than a half of a page...This is supposed inform
-the reader of general jist of your project...
+This project's goal was to to create a top-down 2-dimentional model
+of the positional path of the moons of Mars, Phobos and Deimos.
+We created a Fortran 90 program to simulate the orbit of the two moons
+and generate data files for later analysis.
+The simulation will be provided some initial conditions of a given moon,
+and simulate the orbit over the course of one orbital period, as defined
+by NASA~\cite{nasa}
 
 \end{abstract}
 
@@ -67,7 +72,7 @@ Make sure you include a figure caption for EACH figure.  Make sure you include a
 For example:
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.5\textwidth, angle =-90]{graph.ps}
+\includegraphics[width=0.5\textwidth, angle =-90]{../presentation/orbits}
 \caption{Orbital period in the $x-y$ plane for two full orbits of the Earth orbiting the Sun.}
 \label{fig:graph}
 \end{figure}
@@ -83,6 +88,12 @@ For example:
 Douglas C. Giancoli
 \textit{Physics for Scientists and Engineers}. 
 Pearson Education Inc., Upper Saddle River, New Jersey, 2009.
+
+\bibitem{nasa} 
+NASA
+\textit{Mars Fact Sheet}. 
+NASA, 2016
+nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html
 
 \end{thebibliography}
 
