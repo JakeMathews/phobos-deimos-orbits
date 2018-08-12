@@ -280,3 +280,6 @@ TSWLatexianTemp*
 
 # standalone packages
 *.sta
+
+# visual studio code workspace files
+.vscode/
