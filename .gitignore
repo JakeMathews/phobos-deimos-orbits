@@ -280,6 +280,3 @@ TSWLatexianTemp*
 
 # standalone packages
 *.sta
-
-# Run script
-run.sh
