@@ -41,15 +41,59 @@ by NASA~\cite{nasa}
 
 \end{abstract}
 
+
+
+
 % Write your introduction here, include pictures, tables, equations, etc...
 \section{Introduction}
-An object in orbit is a simple kinematics problem illustrated in 
+An object in orbit is a simple kinematics problem illustrated in Fig.~\ref{fig:centripetal}
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.5\textwidth, angle =0]{../images/centripetal-force}
-  \caption{Orbital period in the $x-y$ plane for two full orbits of the Earth orbiting the Sun.}
-  \label{fig:centripital}
+  \includegraphics[width=0.6\textwidth, angle =0]{../images/centripetal-force}
+  \caption{Centripetal force on an object with a velocity vector}
+  \label{fig:centripetal}
+\end{figure}
+\noindent
+In Fig.~\ref{fig:centripetal} there is an object with an intial velocity vector
+and a centripetal force pulling it towards the center. The black circle represents
+the objects path over time. In the case of an orbit, the velocity vector is always 
+perpendicular to the centripetal force vector. This is what the program is attempting to simulate,
+where the orbiting object is each of the Mars' moons, the center object is Mars
+iteself, and the centripetal force providing the acceleration to change each moon's
+velocity vector is gravity.
+
+\vspace{\baselineskip} \noindent
+The program will need some initial conditions to be set before simulating
+the motion of Phobos and Deimos such as the initial position, the initial
+velocity, moon mass, Mars mass, gravitational constants, as well as time steps and a maximum 
+simulation period. Initial velocity and gravitational constants are calculated
+by the program based of the properties in Table~\ref{table:moon-properties}.
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|r|c|c|}
+  \hline
+  Moon Orbit Properties                & Phobos  & Deimos  \\ \hline
+  Semi-Major Axis ($km$)                 & 9378    & 23459   \\ \hline
+  Mass ($10^{15} kg$) & 1015    & 2.4     \\ \hline
+  Orbital Period ($Earth\ days$)          & 0.31891 & 1.26244 \\ \hline
+  \end{tabular}
+  \label{table:moon-properties}
+  \caption{Properties of Phobos and Deimos as described by NASA~\cite{nasa}}
+  \end{table}
+
+\noindent
+The initial $x-y$ position is defined by each moons semi-major axis. 
+The semi-major axis is half the length of the major axis of an ellipse.
+This is illustrated in Fig.~\ref{fig:semi-major-axis} with both 
+Phobos and Deimos labled.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=1.0\textwidth, angle =0]{../images/semi-major-axis}
+  \caption{A depiction of the semi-major axis of both Phobos and Demimos}
+  \label{fig:semi-major-axis}
 \end{figure}
 
 % Do ALL math derivations here...label each equation and reference the
@@ -67,6 +111,8 @@ mass in kilograms, $v$ is the velocity measured in meters per second, and $r$ is
 the radius of the curved path.  Equation~\eqref{eq:force} was obtain from~\cite{uni}.
 
 
+
+
 \section{Computational Methods \& Techniques}
 \noindent Include snipits of your code, DO NOT INCLUDE YOUR ENTIRE CODE HERE!!!!  
 Write about the methods you used, make sure you \textbf{\textit{explain}} the methods!!  Don't
@@ -78,14 +124,16 @@ Make sure you include a figure caption for EACH figure.  Make sure you include a
 For example:
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.5\textwidth, angle =0]{../images/orbits}
-\caption{Orbital period in the $x-y$ plane for two full orbits of the Earth orbiting the Sun.}
-\label{fig:graph}
+\includegraphics[width=1.0\textwidth, angle =0]{../images/orbits}
+\caption{Orbital period in the $x-y$ plane for one full orbit of Phobos and Deimos orbiting Mars.}
+\label{fig:orbit-diagram}
 \end{figure}
-\noindent In Fig.~\ref{fig:graph}, the orbit is set to 2 full periods...
+\noindent In Fig.~\ref{fig:orbit-diagram}, the orbit is set to 2 full periods...
 
 \section{Conclusions}
 \noindent Summarize your results...This should be about a 1 page minimum!!!
+
+
 
 
 \begin{thebibliography}{99}
@@ -102,7 +150,6 @@ NASA, 2016
 nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html
 
 \end{thebibliography}
-
 
 
 
