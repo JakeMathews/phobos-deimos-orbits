@@ -1,0 +1,93 @@
+
+%---Define your document class, packages, and new commands
+
+\documentclass[11pt]{article}
+\usepackage[top=2.54cm, left=2.54cm, right=2.54cm, bottom=2.54cm]{geometry}
+
+\usepackage{amsfonts}   % for statements to be commented out
+\usepackage{amssymb}
+\usepackage{amsmath}    % for subequations
+\usepackage{setspace}
+\usepackage{graphicx}
+
+
+%------------Document-Begins-Here----------------------%
+
+\begin{document}
+
+
+\title{\textbf{Title of Project}}
+
+\author{Omair Zubairi
+\thanks{zubairio@wit.edu}\\
+Department of Sciences, Wentworth Institute of Technology\\
+550 Huntington Avenue, Boston, MA 02115\\
+\and Author 2
+\thanks{author2@wit.edu}\\
+Department of whatever, Wentworth Institute of Technology\\
+550 Huntington Avenue, Boston, MA 02115}
+
+\maketitle
+
+\begin{abstract}
+
+Abstract goes here...no more than a half of a page...This is supposed inform
+the reader of general jist of your project...
+
+\end{abstract}
+
+
+\section{Introduction}
+\noindent Write your introduction here, include pictures, tables, equations, etc...
+
+\section{Theory}
+\noindent Do ALL math derivations here...label each equation and reference the
+equations accordingly... For example:  From Eq. (2), we see that Eqs. (3) - (7) 
+can be simplified, blah, blah...\\
+
+\noindent For every equation, you need to explain each variable, for example:
+
+\begin{equation}
+\label{eq:force}
+F=\dfrac{mv^2}{r}~.
+\end{equation}
+\noindent In Eq.~\eqref{eq:force}, $F$ is the force measured in Newtons, $m$ is the
+mass in kilograms, $v$ is the velocity measured in meters per second, and $r$ is
+the radius of the curved path.  Equation~\eqref{eq:force} was obtain from~\cite{uni}.
+
+
+\section{Computational Methods \& Techniques}
+\noindent Include snipits of your code, DO NOT INCLUDE YOUR ENTIRE CODE HERE!!!!  
+Write about the methods you used, make sure you \textbf{\textit{explain}} the methods!!  Don't
+just say we used ``RK4", you need to explain what is RK4.
+
+\section{Results}
+\noindent Include ALL results here, including tables of results, plots of results, numerical values, etc...
+Make sure you include a figure caption for EACH figure.  Make sure you include a table caption for each table.
+For example:
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth, angle =-90]{graph.ps}
+\caption{Orbital period in the $x-y$ plane for two full orbits of the Earth orbiting the Sun.}
+\label{fig:graph}
+\end{figure}
+\noindent In Fig.~\ref{fig:graph}, the orbit is set to 2 full periods...
+
+\section{Conclusions}
+\noindent Summarize your results...This should be about a 1 page minimum!!!
+
+
+\begin{thebibliography}{99}
+
+\bibitem{uni} 
+Douglas C. Giancoli
+\textit{Physics for Scientists and Engineers}. 
+Pearson Education Inc., Upper Saddle River, New Jersey, 2009.
+
+\end{thebibliography}
+
+
+
+
+
+\end{document}
