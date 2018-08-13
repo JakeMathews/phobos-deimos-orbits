@@ -6,8 +6,8 @@ program simulation
 	real(kind = 8) :: t, tmax, dt, tInitial
 	real(kind = 8) :: initialVelocity
 
-	real(kind = 8), parameter :: normalizedGravityPhobos = 4.28871 * 10**13
-	real(kind = 8), parameter :: normalizedGravityDeimos = 4.2839 * 10**13
+        real(kind = 8), parameter :: normalizedGravityPhobos = 4.28871 * (10**7)*(10**6)
+        real(kind = 8), parameter :: normalizedGravityDeimos = 4.2839 * (10**7)*(10**6)
 
 	! Set general intial conditions
 	tInitial = 0.0d0
@@ -32,7 +32,7 @@ program simulation
 	open(unit = 10, file = 'phobos.dat', status = 'unknown')
 	open(unit = 20, file = 'deimos.dat', status = 'unknown')
 
-  call calculateOrbit(phobos(1), phobos(2), phobos(3), phobos(4), t, 27553.824d0, dt, normalizedGravityPhobos, 10)
+        !call calculateOrbit(phobos(1), phobos(2), phobos(3), phobos(4), t, 27553.824d0, dt, normalizedGravityPhobos, 10)
 
 	t = tInitial
 	call calculateOrbit(deimos(1), deimos(2), deimos(3), deimos(4), t, 109074.816d0, dt, normalizedGravityDeimos, 20)
@@ -64,6 +64,9 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileUnit)
 	real(kind = 8), intent(in) :: y1, y2, y3, y4
 	real(kind = 8), allocatable :: y(:)
 	real(kind = 8) :: t
+	real(kind = 8) :: energy 
+	real(kind = 8) :: kinetic 
+	real(kind = 8) :: potential
 	real(kind = 8), intent(in) :: tmax, dt
 	integer, intent(in) :: fileUnit
 	real(kind = 8), intent(in) :: gravity
@@ -88,6 +91,10 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileUnit)
 	y(3) = y3	! initial x-velocity (vy) 
 	y(4) = y4	! initial y-velocity (vy)
 
+	open(unit = 30, file = 'energy.dat', status = 'unknown')
+	open(unit = 40, file = 'kinetic.dat', status = 'unknown')
+	open(unit = 50, file = 'potential.dat', status = 'unknown')
+
 	! integrate forward in time
 	do while (t <= tmax)
 		! evaluate right-hand-side of ODEs
@@ -109,9 +116,18 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileUnit)
 		y = y + ((f1 + f4) / 2 + (f2 + f3)) / 3
 		t = t + dt	! increment time
 		
+                kinetic = (1./2.)*(y3**2+y4**2)
+                potential = gravity*sqrt(y1**2+y2**2)
+                energy = (potential+kinetic)
+
 		! write out the results
 		write(fileUnit, *) y(1), y(2)
+                write(30, *) t, energy
+                write(40, *) t, kinetic
+                write(50, *) t, potential
 	end do
+
+        close(unit = 30)
 
 	return
 end subroutine calculateOrbit
