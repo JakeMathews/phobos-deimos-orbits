@@ -4,4 +4,4 @@ rm *.dat
 rm *.out
 gfortran simulation.f90
 ./a.out
-xmgrace deimos.dat
+xmgrace phobos-energy.dat

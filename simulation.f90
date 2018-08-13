@@ -3,7 +3,7 @@ program simulation
 
 	real(kind = 8), allocatable :: phobos(:)
 	real(kind = 8), allocatable :: deimos(:)
-	real(kind = 8) :: t, tmax, dt, tInitial
+	real(kind = 8) :: tmax, dt, tInitial
 	real(kind = 8) :: initialVelocity
 
         real(kind = 8), parameter :: normalizedGravityPhobos = 4.28871 * (10**7)*(10**6)
@@ -11,7 +11,6 @@ program simulation
 
 	! Set general intial conditions
 	tInitial = 0.0d0
-	t = tInitial
 	dt = 1.0d0
 
 	! Set phobos inital conditions
@@ -30,15 +29,17 @@ program simulation
 
 	! open a files for output
 	open(unit = 10, file = 'phobos.dat', status = 'unknown')
-	open(unit = 20, file = 'deimos.dat', status = 'unknown')
+	open(unit = 20, file = 'phobos-energy.dat', status = 'unknown')
+	open(unit = 30, file = 'deimos.dat', status = 'unknown')
+	open(unit = 40, file = 'deimos-energy.dat', status = 'unknown')
 
-        !call calculateOrbit(phobos(1), phobos(2), phobos(3), phobos(4), t, 27553.824d0, dt, normalizedGravityPhobos, 10)
-
-	t = tInitial
-	call calculateOrbit(deimos(1), deimos(2), deimos(3), deimos(4), t, 109074.816d0, dt, normalizedGravityDeimos, 20)
+  call calculateOrbit(phobos(1), phobos(2), phobos(3), phobos(4), 27553.824d0, dt, normalizedGravityPhobos, 10, 20)
+	call calculateOrbit(deimos(1), deimos(2), deimos(3), deimos(4), 109074.816d0, dt, normalizedGravityDeimos, 30, 40)
 
 	close(unit = 10)
 	close(unit = 20)
+	close(unit = 30)
+	close(unit = 40)
 
 	stop
 end program simulation
@@ -55,7 +56,7 @@ function initialVelocity(normalizedGravity, moonSemiMajorAxis)
 	return
 end function
 
-subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileUnit)
+subroutine calculateOrbit(y1, y2, y3, y4, tmax, dt, gravity, posFileUnit, energyFileUnit)
 	implicit none
 
 	integer :: num_eqns ! Number of equations
@@ -68,7 +69,7 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileUnit)
 	real(kind = 8) :: kinetic 
 	real(kind = 8) :: potential
 	real(kind = 8), intent(in) :: tmax, dt
-	integer, intent(in) :: fileUnit
+	integer, intent(in) :: posFileUnit, energyFileUnit
 	real(kind = 8), intent(in) :: gravity
 
 	real(kind = 8), allocatable :: f1(:), f2(:), f3(:), f4(:) ! y1
@@ -90,10 +91,7 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileUnit)
 	y(2) = y2	! initial y-coordinate
 	y(3) = y3	! initial x-velocity (vy) 
 	y(4) = y4	! initial y-velocity (vy)
-
-	open(unit = 30, file = 'energy.dat', status = 'unknown')
-	open(unit = 40, file = 'kinetic.dat', status = 'unknown')
-	open(unit = 50, file = 'potential.dat', status = 'unknown')
+	t = 0.0d0
 
 	! integrate forward in time
 	do while (t <= tmax)
@@ -116,18 +114,15 @@ subroutine calculateOrbit(y1, y2, y3, y4, t, tmax, dt, gravity, fileUnit)
 		y = y + ((f1 + f4) / 2 + (f2 + f3)) / 3
 		t = t + dt	! increment time
 		
-                kinetic = (1./2.)*(y3**2+y4**2)
-                potential = gravity*sqrt(y1**2+y2**2)
-                energy = (potential+kinetic)
+		! calculate system energy
+    kinetic = 0.5d0 * (y3**2 + y4**2)
+    potential = gravity * sqrt(y1**2 + y2**2)
+    energy = potential + kinetic
 
 		! write out the results
-		write(fileUnit, *) y(1), y(2)
-                write(30, *) t, energy
-                write(40, *) t, kinetic
-                write(50, *) t, potential
+		write(posFileUnit, *) y(1), y(2)
+    write(energyFileUnit, *) t, energy
 	end do
-
-        close(unit = 30)
 
 	return
 end subroutine calculateOrbit
