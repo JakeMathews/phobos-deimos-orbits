@@ -6,8 +6,8 @@ program simulation
 	real(kind = 8) :: tmax, dt, tInitial
 	real(kind = 8) :: initialVelocity
 
-        real(kind = 8), parameter :: normalizedGravityPhobos = 4.28871 * (10**7)*(10**6)
-        real(kind = 8), parameter :: normalizedGravityDeimos = 4.2839 * (10**7)*(10**6)
+  real(kind = 8), parameter :: normalizedGravityPhobos = 4.28871 * (10**7)*(10**6)
+  real(kind = 8), parameter :: normalizedGravityDeimos = 4.2839 * (10**7)*(10**6)
 
 	! Set general intial conditions
 	tInitial = 0.0d0
